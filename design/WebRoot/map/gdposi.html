@@ -1,0 +1,48 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>高德定位</title>
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=57990de1ae5e944439e6b59d78117269"></script>
+    <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+<body>
+<div id='container'></div>
+<div id="tip"></div>
+<script type="text/javascript">
+
+	//H5获取坐标
+	if (navigator.geolocation){//检测是否支持地理定位
+		navigator.geolocation.getCurrentPosition(showPosition);
+	}
+	  
+	//接收一个coordinates对象
+	function showPosition(position){
+	  /* x.innerHTML="Latitude: " + position.coords.latitude + 
+	  "<br />Longitude: " + position.coords.longitude;	 */
+	  
+		map(position.coords.longitude,position.coords.latitude);
+	}
+	
+	//高德地图定位
+	function map(lng,lat){
+		
+		var mapObj = new AMap.Map('container',{
+			resizeEnable: true,
+			zoom:16,
+			center: [lng, lat]
+		});
+		
+		marker = new AMap.Marker({
+			position: [lng+0.006,lat+0.0025]
+		});
+		marker.setMap(mapObj);
+		
+		
+	}
+
+</script>
+</body>
+</html>

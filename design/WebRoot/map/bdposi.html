@@ -1,0 +1,44 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+	body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/getscript?v=2.0&ak=f3kvXAtvYgmDbnGvdubfUduUV1XLhUhP&services=&t=20151223175945"></script>
+	<title>百度定位</title>
+</head>
+<body>
+	<div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+	
+	//H5获取坐标
+	if (navigator.geolocation){//检测是否支持地理定位
+		navigator.geolocation.getCurrentPosition(showPosition);
+	}
+	
+	//接收一个coordinates对象
+	function showPosition(position){
+	  /* x.innerHTML="Latitude: " + position.coords.latitude + 
+	  "<br />Longitude: " + position.coords.longitude;	 */
+	  
+		map(position.coords.longitude,position.coords.latitude);
+	}
+
+	//百度地图定位
+	function map(lng,lat){
+		
+		var map = new BMap.Map("allmap");
+		var point = new BMap.Point(lng, lat);
+		map.centerAndZoom(point, 15);
+		var marker = new BMap.Marker(point);  		//创建标注
+		map.addOverlay(marker);               		//将标注添加到地图中
+		marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+		
+	}
+
+</script>
